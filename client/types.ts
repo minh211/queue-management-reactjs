@@ -37,6 +37,7 @@ export interface Ticket {
   ticketNumber: number;
   doctor?: { firstName: string; lastName: string; doctorId: string };
   patient: Patient;
+  caseDescription?: string;
 }
 
 export interface InProgressTicket extends Ticket {

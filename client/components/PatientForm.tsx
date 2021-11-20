@@ -9,11 +9,20 @@ import TextArea from "@atlaskit/textarea";
 import { AppContext } from "../AppContainer";
 import { Patient } from "../types";
 
+
 function validate(value: string | undefined) {
   if (value === "") {
     return "EMPTY_FIELD";
   }
   return undefined;
+}
+
+function validateField (value?: string) {
+    if (!value) {
+        return 'REQUIRED';
+    } else if (new Date(value) > new Date()) {
+        return 'EXPIRED';
+    }
 }
 
 export const PatientForm: React.FC = () => {
@@ -53,10 +62,28 @@ export const PatientForm: React.FC = () => {
                 />
               )}
             </Field>
-            <Field name="birthday" label="Birthday">
-              {({ fieldProps }) => <DatePicker {...fieldProps} />}
+            <Field name="birthday" label="Birthday"
+                   validate={validateField}
+                   isRequired>
+              {({ fieldProps,error }) =>
+                  <>
+                  <DatePicker {...fieldProps}
+                              placeholder="MM/DD/YYYY"
+                              dateFormat="MM/DD/YYYY"
+                              defaultValue={new Date().toString()}
+                  />
+                      {error === 'REQUIRED' && (
+                          <ErrorMessage>This field is required</ErrorMessage>
+                      )}
+                      {error === 'EXPIRED' && (
+                          <ErrorMessage>
+                              You may not enter a datetime that is in the future
+                          </ErrorMessage>
+                      )}
+                  </>
+              }
             </Field>
-            <Field label="Case description" name="description">
+            <Field label="Case description" name="caseDescription">
               {({ fieldProps }) => (
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
