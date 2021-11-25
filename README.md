@@ -30,7 +30,7 @@ When the client-side is deployed, to configure the database settings, go to serv
 ```
 
 
-## Running Tests
+## Running Test
 
 [Testing Documentation](https://github.com/minh211/testing_mocha)
 
@@ -41,7 +41,7 @@ To run tests, run the following Documentation and deploy the command:
 ```
 
 
-## Authors
+## Author
 
 - [@minh211](https://www.github.com/minh211)
 
